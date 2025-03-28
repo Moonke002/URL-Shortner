@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortened</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .result-box {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Shortened Successfully!</h1>
+        <div class="result-box">
+            <strong>Original URL:</strong><br>
+            {{ original_url }}
+        </div>
+        <div class="result-box">
+            <strong>Shortened URL:</strong><br>
+            <span id="short-url">{{ short_url }}</span>
+        </div>
+        <button class="copy-btn" onclick="copyToClipboard()">Copy Shortened URL</button>
+        <a href="{{ url_for('index') }}" class="back-link">Shorten another URL</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const shortUrl = document.getElementById('short-url').textContent;
+            navigator.clipboard.writeText(shortUrl).then(() => {
+                alert('URL copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html> 
